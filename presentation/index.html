@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Semantic versioning</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/serif.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Semantic Versioning</h2>
+				A short introduction to <a href="https://semver.org/spec/v2.0.0.html#semantic-versioning-200">SemVer 2.0</a> and some Examples on <a href="https://github.com/adamralph/minver">MinVer</a>.
+			</section>
+
+			<section>
+				<h2>SemVer 2.0</h2>
+				<p class="fragment">1. MAJOR version when you make incompatible API changes,</p>
+				<p class="fragment">2. MINOR version when you add functionality in a backwards-compatible manner, and</p>
+				<p class="fragment">3. PATCH version when you make backwards-compatible bug fixes.</p>
+				<p class="fragment">Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.</p>
+			</section>
+			<section>
+				<h2>SemVer 2.0 Rules</h2>
+				<section data-markdown>
+					### Rule 1: public API
+					
+					- Software using Semantic Versioning MUST declare a public API.
+					- This API could be declared in the code itself or exist strictly in documentation.
+					- However it is done, it should be precise and comprehensive.
+				</section>
+				<section data-markdown>
+					### Rule 2: numbers
+					- A normal version number MUST take the form X.Y.Z where X, Y, and Z are non-negative integers, and
+					- MUST NOT contain leading zeroes. 
+					- X is the major version, Y is the minor version, and Z is the patch version. 
+					- Each element MUST increase numerically. 
+					```
+					1.9.0 -> 1.10.0 -> 1.11.0.
+					```
+				</section>
+				<section data-markdown>
+					### Rule 3: package modifictions
+					- Once a versioned package has been released, the contents of that version MUST NOT be modified. 
+					- Any modifications MUST be released as a new version.
+				</section>
+				<section data-markdown>
+					### Rule 4: initial development
+					- Major version zero (0.y.z) is for initial development. 
+					- Anything may change at any time.
+					- The public API should not be considered stable.
+				</section>
+				<section data-markdown>
+					### Rule 5: version 1.0.0
+					- Version 1.0.0 defines the public API. 
+					- The way in which the version number is incremented after this release is dependent on this public API and how it changes.
+				</section>
+				<section data-markdown>
+					### Rule 6: patch version
+					 Patch version Z (x.y.Z | x > 0) MUST be incremented if only backwards compatible bug fixes are introduced. 
+					 ```
+					 1.0.0 -> 1.0.1 -> 1.0.2 -> 1.0.3
+					 ```
+					 A bug fix is defined as an internal change that fixes incorrect behavior.
+				</section>
+				<section data-markdown>
+					### Rule 7: minor version
+					Minor version Y (x.Y.z | x > 0) MUST be incremented if new, backwards compatible functionality is introduced to the public API.
+					```
+					1.0.0 -> 1.0.1 -> 1.1.0
+					```
+				</section>
+				<section data-markdown>
+					### Rule 8: major version
+					Major version X (X.y.z | X > 0) MUST be incremented if any backwards incompatible changes are introduced to the public API.
+					```
+					1.0.0 -> 1.1.0 -> 1.1.1 -> 2.0.0
+					```
+				</section>
+				<section data-markdown>
+					### Rule 9 pre-release
+					A pre-release version MAY be denoted by appending a hyphen and a series of dot separated identifiers immediately following the patch version. 
+					```
+					1.0.0-alpha, 1.0.0-alpha.1, 1.0.0-0.3.7, 1.0.0-x.7.z.92
+					```
+				</section>
+				<section data-markdown>
+					### Rule 10: build metadata
+					Build metadata MAY be denoted by appending a plus sign and a series of dot separated identifiers immediately following the patch or pre-release version.
+					```
+					1.0.0-alpha+001, 1.0.0+20130313144700, 1.0.0-beta+exp.sha.5114f85
+					```
+				</section>
+				<section data-markdown>
+					### Rule 11: precedence
+					Precedence refers to how versions are compared to each other when ordered. 
+					```
+					1.0.0 < 2.0.0 < 2.1.0 < 2.1.1
+					```
+					```
+					1.0.0-alpha < 1.0.0.
+					```
+					```
+					1.0.0-alpha < 1.0.0-alpha.1 < 1.0.0-alpha.beta < 1.0.0-beta < 
+						1.0.0-beta.2 < 1.0.0-beta.11 < 1.0.0-rc.1 < 1.0.0.
+					```
+				</section>
+			</section>
+			<section data-markdown>
+					## (.NET) Implementations
+
+					None of these enforce the SemVer 2.0, but all of these support it.
+
+					- [GitVersion](https://gitversion.readthedocs.io/en/latest/)
+					- [Appccelerate Version Task](http://www.appccelerate.com/version.html)
+					- [MinVer](https://github.com/adamralph/minver)
+			</section>
+			<section>
+				<section data-markdown>
+					## GitVersion
+
+					- Git history and tag based versioning
+					- Supports GitFlow, GitHubFlow
+					- Comprehensive documentation and build server examples
+
+					Show: [GitHub page](https://github.com/GitTools/GitVersion)
+				</section>
+				<section data-markdown>
+					## GitVersion example
+					![](https://gitversion.readthedocs.io/en/latest/img/CommitGraph.png)
+
+					```
+					e137e9      ->      1.0.0+0
+					a5f6c5      ->      1.0.1+1
+					adb29a      ->      1.0.1-feature-foo.1+1 (PR #5 Version: `1.0.1-PullRequest.5+2`)
+					7c2438      ->      1.0.1-feature-foo.1+2 (PR #5 Version: `1.0.1-PullRequest.5+3`)
+					5f413b      ->      1.0.1+4
+					d6155b      ->      2.0.0-rc.1+0 (Before and after tag)
+					d53ab6      ->      2.0.0-rc.2+1 (Pre-release number was bumped because of the tag on previous commit)
+					b5d142      ->      2.0.0+0 (2.0.0 branch was merged, so master is now at 2.0.0)
+					```
+				</section>
+				<section data-markdown>
+					## GitFlow example
+
+					![](https://gitversion.readthedocs.io/en/latest/git-branching-strategies/img/05119d0cd4ecaaefff94_feature-branch.png)
+				</section>
+				<section data-markdown>
+					## GitHubFlow example
+
+					![](https://gitversion.readthedocs.io/en/latest/git-branching-strategies/img/githubflow_feature-branch.png)
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					## Appccelerate Version Task
+
+					- Git tag based versioning
+					- MSBuild Task (.NET Framework)
+					- Command line tool
+					- Team City integration
+
+					![bla](http://www.appccelerate.com/img/Version.png)
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					## MinVer
+
+					- Git tag based
+					- Command line tool -> any project
+					- Package for .NET Core
+
+					-> examples with MinVer
+				</section>
+
+				<section data-markdown>
+					## Command Line tool
+
+					Nuget package: [minver-cli](https://www.nuget.org/packages/minver-cli)
+					```
+					dotnet tool install --global minver-cli --version 1.0.0-beta.4
+					```
+
+					```
+					> minver
+					MinVer: Using { Commit: 7f6d12f, Tag: '0.0.1', Version: 0.0.1, Height: 0 }.
+					MinVer: Calculated version 0.0.1.
+					0.0.1
+					```
+				</section>
+			</section>
+			<section data-markdown>
+				## Additional references
+				- [A successful Git branching model (GitFlow)](https://nvie.com/posts/a-successful-git-branching-model/)
+				- [OneFlow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>
