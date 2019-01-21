@@ -209,6 +209,24 @@
 				</section>
 			</section>
 			<section data-markdown>
+				### TL;DR
+				- Current schema (yyyy.mm.dd...) does not have any semating information on the content only on the build date
+				- SemVer needs more manual interaction through labeling in git
+				- SemVer allows us to have a semantic versioning including history information (commit leads to always same version)
+				- In MinVer all branching models allowed (GitVersion enforces certain branching models)
+				- GitVersion is quite configurable and has some magic in there DANGER: Dragons ahead (enforces some workflows, rules, ...)
+				- Appccelerate needs custom build steps to allow an assembly versioning on new .NET SDK-Style projects
+				- Current solution is fully automated
+			</section>
+			<section data-markdown>
+				### //ToDo
+				- How to migrate? `2018.01.12 > 2.0.0` -> unlist
+				- Add nuget packages to projects (automatic assembly versioning)
+				- Build server cleanup -> allows us to cleanup custom tasks
+				- Write howto -> semver (independend on chosen implementation) needs some knowledge with the label templates
+				- ...
+			</section>
+			<section data-markdown>
 				## Additional references
 				- [A successful Git branching model (GitFlow)](https://nvie.com/posts/a-successful-git-branching-model/)
 				- [OneFlow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
